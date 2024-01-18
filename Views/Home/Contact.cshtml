@@ -1,0 +1,30 @@
+﻿<section id="contact" class="py-5">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-4 mb-4">Contactez-nous</h2>
+                <p class="lead">N'hésitez pas à nous contacter pour toutes questions, préoccupations ou simplement pour partager votre amour des livres.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <form method="post" action="@Url.Action("EnvoyerMessage")">
+                    @Html.AntiForgeryToken() <!-- Ajout du jeton anti-contrefaçon -->
+                    <div class="form-group m-3">
+                        <label for="Nom">Nom</label>
+                        <input type="text" class="form-control" id="Nom" name="Nom" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="Mail">Adresse e-mail</label>
+                        <input type="email" class="form-control" id="Mail" name="Mail" placeholder="Votre adresse e-mail" required>
+                    </div>
+                    <div class="form-group m-3">
+                        <label for="Contenu">Message</label>
+                        <textarea class="form-control" id="Contenu" name="Contenu" rows="5" placeholder="Votre message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary m-3">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

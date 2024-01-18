@@ -1,0 +1,66 @@
+﻿@model List<library.Models.Emprunt>
+@{
+    Layout = "_AdminPanel"; // Spécifie un layout différent pour le backoffice
+}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100px; /* Ajustez la taille maximale de l'image selon vos besoins */
+        height: auto;
+    }
+</style>
+
+<h2>Livres Empruntés par @ViewData["SubscriberName"]</h2>
+
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>EmpruntID</th>
+                <th>LivreId</th>
+                <th>DateEmprunt</th>
+                <th>DateRetour</th>
+                <th>Titre de livre</th>
+                <th>Image</th>
+
+                <!-- Ajouter d'autres colonnes pertinentes au besoin -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emprunt in Model)
+            {
+                <tr>
+                    <td>@emprunt.Id</td>
+                    <td>@emprunt.LivreId</td>
+                    <td>@emprunt.DateEmprunt</td>
+                    <td>@emprunt.DateRetour</td>
+                    <td>@emprunt.Livre.Titre</td>
+                    <td>  <img src="/images/@emprunt.Livre.ImageUrl" class="card-img-top" alt="Image du livre"> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucun livre emprunté par cet abonné.</p>
+}
+<a asp-controller="Abonne" asp-action="Index" class="btn btn-primary m-4">Retour à la liste des abonnés</a>
+

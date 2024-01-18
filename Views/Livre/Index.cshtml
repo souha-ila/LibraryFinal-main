@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_AdminPanel"; // Spécifie un layout différent pour le backoffice
+}
+
+@model IEnumerable<library.Models.Livre>
+
+<h1>Liste des Livres </h1>
+
+<div class="container">
+
+    <form method="get" action="@Url.Action("Index", "Livre")">
+        <div class="input-group mb-3" style="max-width: 600px; max-height: 200px;">
+            <input type="text" name="searchTerm" class="form-control" placeholder="Rechercher par titre..." />
+            <div class="input-group-append">
+                <button type="submit" class="btn ">
+                    <img src="/images/icons8.gif" alt="Search" style="max-width: 30px; max-height: 30px;"  />
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Emprunté</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var livre in Model)
+            {
+                <tr>
+                    <td>@livre.Id</td>
+                    <td><img src="/images/@livre.ImageUrl" alt="Image du livre" style="max-width: 100px; max-height: 100px;" /></td>
+                    <td>@livre.Titre</td>
+                    <td>@livre.Auteur</td>
+
+                    <td>@(livre.EstEmprunte ? "Oui" : "Non")</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Livre", new { id = livre.Id })">
+                            <img src="/images/edit.gif" alt="Details" style="max-width: 30px; max-height: 30px;" />
+                        </a>
+                        <a href="@Url.Action("DetailsAD", "Livre", new { id = livre.Id })">
+                            <img src="/images/search.gif" alt="Details" style="max-width: 30px; max-height: 30px;" />
+                        </a>
+                        <a onclick="confirmDelete(@livre.Id)">
+                            <img src="/images/bin.gif" alt="Details" style="max-width: 30px; max-height: 30px;" />
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a href="@Url.Action("AjouterLivre", "Livre")" class="btn btn-success">Ajouter un nouveau livre</a>
+
+@section scripts {
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Voulez-vous vraiment supprimer ce livre?")) {
+                window.location.href = "@Url.Action("Delete", "Livre")" + "?id=" + id;
+            }
+        }
+    </script>
+}

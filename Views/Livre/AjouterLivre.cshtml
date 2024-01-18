@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "_AdminPanel"; // Spécifie un layout différent pour le backoffice
+}
+@model library.Models.Livre
+
+<h1>Ajouter un nouveau Livre</h1>
+
+<form asp-action="AjouterLivre">
+    <div class="form-group">
+        <label asp-for="Titre" class="control-label">Titre:</label>
+        <input asp-for="Titre" class="form-control" />
+        <span asp-validation-for="Titre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Auteur" class="control-label">Auteur:</label>
+        <input asp-for="Auteur" class="form-control" />
+        <span asp-validation-for="Auteur" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Resume" class="control-label">Résumé:</label>
+        <textarea asp-for="Resume" class="form-control"></textarea>
+        <span asp-validation-for="Resume" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EstEmprunte" class="control-label">Est Emprunté:</label>
+        <input asp-for="EstEmprunte" type="checkbox" />
+        <span asp-validation-for="EstEmprunte" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl" class="control-label">URL de l'Image:</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Ajouter" class="btn btn-primary" />
+    </div>
+
+</form>

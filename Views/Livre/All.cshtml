@@ -1,0 +1,28 @@
+﻿@model IEnumerable<library.Models.Livre>
+
+
+    <section id="catalogue" class="py-lg-5">
+        <div class="container">
+            <div class="row">
+                @foreach (var livre in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <img src="/images/@livre.ImageUrl" class="card-img-top" alt="Image du livre">
+                            <div class="card-body">
+                                <h5 class="card-title">@livre.Titre</h5>
+                                <p class="card-text">@livre.Auteur</p>
+                       
+                                <p class="card-text">
+                                        </p>
+                                <a href="@Url.Action("Details", "Livre", new { id = livre.Id })" class="btn btn-primary">Détails</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
+

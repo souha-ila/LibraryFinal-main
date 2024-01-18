@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "_AdminPanel"; // Spécifie un layout différent pour le backoffice
+}
+
+@model IEnumerable<library.Models.Emprunt>
+
+@{
+    ViewData["Title"] = "Liste des Emprunts";
+}
+
+<style>
+    /* Add your vintage button style here */
+    .vintage-button {
+        background-color: #e0c9a6;
+        color: #4c4c4c;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #4c4c4c;
+        border-radius: 4px;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+        .vintage-button:hover {
+            background-color: #4c4c4c;
+            color: #e0c9a6;
+        }
+</style>
+
+<h1>Liste des Emprunts</h1>
+
+<p>
+    <a asp-action="Create" class="vintage-button">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LivreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbonneId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateEmprunt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRetour)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LivreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AbonneId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateEmprunt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRetour)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="vintage-button">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="vintage-button">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="vintage-button">Delete</a>
+                </td>
+        
+                <td>
+                    <a asp-controller="Emprunts" asp-action="ReturnBook" asp-route-id="@item.Id" class="vintage-button">Return</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,243 @@
+﻿@model IEnumerable<library.Models.Livre>
+
+@{
+    ViewData["Title"] = "livres Page";
+}
+
+<section>
+   
+
+
+</section>
+
+
+<section id="collection" class="overflow-hidden py-lg-5">
+    <div class="display-header text-center">
+        <h2 class="display-6 fst-italic m-0">Nouveautés littéraires</h2>
+        <p>Voici les ouvrages qui font sensation en ce moment.</p>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var livre in Model.OrderByDescending(l => l.Id).Take(3))
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 image-zoom-effect">
+                    <div class="collection-item position-relative mx-auto">
+
+                        <div class="image-holder">
+
+
+
+                            <img src="/images/@livre.ImageUrl" alt="Image du livre" class="img-fluid" style="max-width: 600px; max-height: 600px;"/>
+                            <div class="product-info position-absolute d-flex justify-content-center align-items-center">
+                                <div class="border d-flex justify-content-center align-items-center text-center">
+                                    <div class="text-wrap">
+                                        <h3 class="m-0">
+                                            <a href="#" class="text-light">@livre.Titre</a>
+                                        </h3>
+                                        <div class="btn-wrap">
+                                           
+                                            <a href="@Url.Action("Details", "Livre", new { id = livre.Id })" class="btn btn-link text-light">Voir Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+
+<section id="testimonials" class="position-relative py-lg-5">
+    <div class="container-lg">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-8 mx-auto">
+                <div class="icon-arrow left-side position-absolute d-flex align-items-center">
+                    <svg class="arrow-left" width="25" height="25">
+                        <use xlink:href="#arrow-left"></use>
+                    </svg>
+                </div>
+                <div class="icon-arrow right-side position-absolute d-flex align-items-center">
+                    <svg class="arrow-right" width="25" height="25">
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </div>
+                <div class="swiper review-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide text-center d-flex justify-content-center">
+                            <div class="review-item">
+                                <blockquote class="fs-2">“Un livre est un ami qui ne change jamais, même si le monde autour de vous change.”</blockquote>
+
+                                <div class="author-detail">
+                                    <div class="name text-dark text-uppercase pt-2 fw-medium">William Feather</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide text-center d-flex justify-content-center">
+                            <div class="review-item">
+                                <blockquote class="fs-2">“Les livres nous donnent un endroit où aller quand nous devons rester où nous sommes.”</blockquote>
+
+                                <div class="author-detail">
+                                    <div class="name text-dark text-uppercase pt-2 fw-medium">Mason Cooley</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</section>
+
+<section id="trending" class="py-lg-5">
+
+    <div class="product-content position-relative">
+        <div class="container-lg">
+            <div class="row">
+                <div class="arrow-wrap">
+                    <div class="icon-caret-arrow left-side position-absolute d-flex align-items-center bg-gray-1 border rounded-pill justify-content-center">
+                        <svg class="caret-arrow-left" width="25" height="25">
+                            <use xlink:href="#caret-arrow-left"></use>
+                        </svg>
+                    </div>
+                    <div class="icon-caret-arrow right-side position-absolute d-flex align-items-center bg-gray-1 border rounded-pill justify-content-center">
+                        <svg class="caret-arrow-right" width="25" height="25">
+                            <use xlink:href="#caret-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+           
+                <div class="swiper product-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var livre in Model)
+                        {
+                        <div class="swiper-slide image-zoom-effect">
+                            <div class="product-item mx-auto">
+                                    <a href="@Url.Action("Details", "Livre", new { id = livre.Id })" >
+
+                                <div class="image-holder mb-2">
+                                        <img src="/images/@livre.ImageUrl" alt="Image du livre" style="max-width: 400px; max-height: 400px;" />
+                                </div>
+                                     
+                                    </a>
+                                <div class="product-info text-center">
+                                    <h3 class="fst-italic m-0">
+                                            <a href="single-product.html" class="text-dark">@livre.Titre</a>
+                                    </h3>
+                                        <div class="product-price text-primary fw-medium">@(livre.Auteur)</div>
+                                </div>
+                            </div>
+                            </div>
+                        }
+                        </div>
+                       
+                </div>
+               
+            </div>
+        </div>
+               
+    </div>
+    <div class="text-center mt-5">
+        <a href="@Url.Action("All", "Livre")" class="btn btn-lg btn-dark">Voir tous</a>
+    </div>
+</section>
+
+<section id="blogs" class="video overflow-hidden position-relative" style="background-image: url(/images/blog.jpg); background-repeat: no-repeat; background-position: center; background-attachment: fixed; width: 100%; height: 682px;">
+    <div class="row">
+        <div class="post-content position-absolute d-flex justify-content-center align-items-center">
+            <div class="display-header text-center text-light">
+                <h2 class="display-6 fst-italic m-0 text-light mb-3">Read Our Biblio Blogs</h2>
+                <p>Read our blogs to get updates and know about the trends.</p>
+                <a href="@Url.Action("AllBlogs", "Home")"  class="btn btn-lg btn-light mt-3">Read Blog Posts</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="instagram-wrap" class="py-lg-6">
+    <div class="container-lg">
+        <div class="row">
+            <h2 class="display-6 text-center fst-italic">Follow us on Insta</h2>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="#" target="_blank">
+                        <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="https://www.instagram.com/templatesjungle/" target="_blank">
+                        <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="https://www.instagram.com/templatesjungle/" target="_blank">
+                        <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="https://www.instagram.com/templatesjungle/" target="_blank">
+                        <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="https://www.instagram.com/templatesjungle/" target="_blank">
+                        <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-3">
+                <div class="image-holder position-relative">
+                    <a href="https://www.instagram.com/templatesjungle/" target="_blank">
+                        <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid">
+                        <div class="border insta-item position-absolute d-flex align-items-center justify-content-center">
+                            <svg class="insta svg-white" width="25" height="25">
+                                <use xlink:href="#insta"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

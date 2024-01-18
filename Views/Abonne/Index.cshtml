@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "_AdminPanel"; // Spécifie un layout différent pour le backoffice
+}
+
+@model IEnumerable<library.Models.Abonne>
+
+@{
+    ViewData["Title"] = "Liste des abonnés";
+}
+
+<style>
+    /* Add your vintage button style here */
+    .vintage-button {
+        background-color: #e0c9a6;
+        color: #4c4c4c;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #4c4c4c;
+        border-radius: 4px;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+        .vintage-button:hover {
+            background-color: #4c4c4c;
+            color: #e0c9a6;
+        }
+</style>
+
+<h1>Liste des Abonnés</h1>
+
+<p>
+    <a asp-action="Create" class="vintage-button">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th></th>
+            <th>Livres Empruntés</th> <!-- Ajout de l'en-tête pour la colonne -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="vintage-button">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="vintage-button">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="vintage-button">Delete</a>
+                </td>
+                <td>
+                    <a asp-controller="Admin" asp-action="BookEm" asp-route-subscriberId="@item.Id" class="vintage-button">Livres Empruntés</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
